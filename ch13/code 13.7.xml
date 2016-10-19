@@ -1,0 +1,49 @@
+<!-- 코드 13.7  XML 요소를 사용하여 SpittleRepository 캐싱 규칙을 선언한다. -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+			   http://www.springframework.org/schema/aop/spring-aop.xsd
+			   http://www.springframework.org/schema/beans
+			   http://www.springframework.org/schema/beans/spring-beans.xsd
+			   http://www.springframework.org/schema/cache
+			   http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+  <aop:config>  <!-- 캐시 어드바이스를 포인트커트에 바인드 -->
+    <aop:advisor advice-ref="cacheAdvice"
+		 pointcut=
+		 "execution(* com.habuma.spittr.db.SpittleRepository.*(..))"/>
+  </aop:config>
+
+  <cache:advice id="cacheAdvice">
+    <cache:caching>
+      <cache:cacheable
+	  cache="spittleCache"
+	  method="findRecent" />  <!-- 캐시될 수 있게 함 -->
+
+      <cache:cacheable
+	  cache="spittleCache" method="findOne" />  <!-- 캐시될 수 있게 함 -->
+
+      <cache:cacheable
+	  cache="spittleCache"
+	  method="findBySpitterId" />  <!-- 캐시될 수 있게 함 -->
+
+      <cache:cache-put
+	  cache="spittleCache"
+	  method="save"
+	  key="#result.id" />  <!-- 저장 시 캐시를 채움 -->
+
+      <cache:cache-evit
+	  cache="spittleCache"
+	  method="remove" />  <!-- 캐시에서 삭제 -->
+    </cache:caching>
+  </cache:advice>
+
+  <bean id="cacheManager class=
+	"org.springframework.cache.concurrent.ConcurrentMapCacheManager"
+	/>
+
+</beans>

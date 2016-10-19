@@ -1,0 +1,35 @@
+<!-- 코드 21.2  주소록 애플리케이션을 위한 메이븐 빌드 파일 -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+			     http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.habuma</groupId>
+  <artifactId>contacts</artifactId>
+  <version>0.1.0</version>
+  <packaging>jar</packaging>  <!-- Jar 파일 생성 -->
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>  <!-- 스프링 부트 스타터 부모로 부터 상속 -->
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.1.4.RELEASE</version>
+  </parent>
+
+  <dependencies>  <!-- 의존성의 위치 -->
+
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>  <!-- 스프링 부트 플러그인 사용 -->
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-maven-plugin></artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

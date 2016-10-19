@@ -1,0 +1,77 @@
+<!-- 2.4.4 프로퍼티 세팅 -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			   http://www.springframework.org/schema/beans/spring-beans.xsd
+			   http://www.springframework.org/schema/context">
+
+  <!-- configuration details go here -->
+
+  <bean id="compactDisc"
+	class="soundsystem.CDPlayer" />
+
+  <bean id="cdPlayer"
+	class="soundsystem.CDPlayer">
+    <property name="compactDisc" ref="compactDisc" />
+  </bean>
+
+  <bean id="cdPlayer"
+	class="soundsystem.CDPlayer"
+	p:compactDisc-ref="compactDisc" />
+  
+
+  <!-- 리터럴 값을 사용하여 프로퍼티 주입하기 -->  
+  <bean id="reallyBlankDisc"
+	class="soundsystem.BlankDisc" />
+
+  <bean id="compactDisc"
+	class="soundsystem.BlankDisc">
+    <property name="title"
+	      value="Sgt. Pepper's Lonely Hearts Club Band" />
+    <porperty name="artist" value="The Beatles" />
+    <property name="tracks">
+      <list>
+	<value>Sgt. Pepper's Lonely Hearts Club Band</value>
+	<value>With a Little Help from My Friends</value>
+	<value>Getting Better</value>
+	<value>Fixing a Hole</value>
+	<!-- ...other tracks omitted for brevity... -->
+      </list>
+    </property>
+  </bean>
+
+  <bean id="compactDisc"
+	class="soundsystem.BlankDisc"
+	p:title="Sgt. Pepper's Lonely Hearts Club Band"
+	p:artist="The Beatles">
+    <property name="tracks">
+      <list>
+	<value>Sgt. Pepper's Lonely Hearts Club Band</value>
+	<value>With a Little Help from My Friends</value>
+	<value>Getting Better</value>
+	<value>Fixing a Hole</value>
+	<!-- ...other tracks omitted for brevity... -->
+      </list>
+    </property>
+  </bean>
+  
+
+  <util:list id="trackList">
+    <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+    <value>With a Little Help from My Friends</value>
+    <value>Getting Better</value>
+    <value>Fixing a Hole</value>
+    <!-- ...other tracks omitted for brevity... -->
+  </util:list>
+
+  <bean id="compactDisc"
+	class="soundsystem.BlankDisc"
+	p:title="Sgt. Pepper's Lonely Hearts Club Band"
+	p:artist="The Beatles"
+	p:tracks-ref="trackList" />
+
+</beans>

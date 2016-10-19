@@ -1,0 +1,18 @@
+<!-- 코드 13.2  <cache:annotation-driven>으로 애너테이션 주도 캐싱 사용하기 -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="
+			   http://www.springframework.org/schema/beans
+			   http://www.springframework.org/schema/beans/spring-beans.xsd
+			   http://www.springframework.org/schema/cache
+			   http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+  <cache:annotation-driven />  <!-- 캐시 활성화 -->
+
+  <bean id="cacheManager" class=
+	"org.springframework.cache.concurrent.ConcurrentMapCacheManager" />  <!-- 캐시 매니저 선언 -->
+  
+</beans>

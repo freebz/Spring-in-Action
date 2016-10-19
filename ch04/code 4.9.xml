@@ -1,0 +1,23 @@
+<!-- 코드 4.9  애너테이션 프리 Audience 클래스를 애스펙트처럼 XML로 선언하기 -->
+
+<aop:config>
+  <aop:aspect ref="audience">  <!-- audience 빈 참조 -->
+
+    <aop:before  <!-- 공연 전 -->
+      pointcut="execution(** concert.Performance.perform(..))"
+      method="silenceCellPhones" />
+
+    <aop:before <!-- 공연 전 -->
+      pointcut="execution(** concert.Performance.perform(..))"
+      method="takeSeats" />
+
+    <aop:after-returning  <!-- 공연 후 -->
+      pointcut="execution(** concert.Performance.perform(..))"
+      method="applause" />
+
+    <aop:after-throwing  <!-- 공연 결과가 나쁜 경우 -->
+      pointcut="execution(** concert.Performance.perform(..))"
+      method="demandRefund" />
+
+  </sop:aspect>
+</aop:config>

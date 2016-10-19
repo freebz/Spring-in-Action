@@ -1,0 +1,36 @@
+<!-- 코드 10.3  XML에서 프로파일 선택 데이터 설정하기 -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc
+			   http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+			   http://www.springframework.org/schema/jee
+			   http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+			   http://www.springframework.org/schema/beans
+			   http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <beans profile="development">  <!-- Development 데이터 소스 -->
+    <jdbc:embedded-database id="dataSource" type="H2">
+      <jdbc:script location="com/habuma/spitter/db/jdbc/schema.sql"/>
+      <jdbc:script location="com/habuma/spitter/db/jdbc/test-data.sql"/>
+    </jdbc:embedded-database>
+  </beans>
+  <beans profile="qa">  <!-- QA 데이터 소스 -->
+    <bean id="dataSource"
+	  class="org.apache.commons.dbcp.BasicDataSource"
+	  p:driverClassName="org.h2.Driver"
+	  p:url="jdbc:h2:tcp://localhost/~/spitter"
+	  p:username="sa"
+	  p:password=""
+	  p:initialSize="5"
+	  p:maxActive="10" />
+  </beans>
+  <beans profile="production">  <!-- Production 데이터 소스 -->
+    <jee:jndi-lookup id="dataSource"
+		     jndi-name="jdbc/SpitterDS"
+		     resource-ref="true" />
+  </beans>
+</beans>

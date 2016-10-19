@@ -1,0 +1,13 @@
+<!-- 코드 6.5  Spring에서 Thymeleaf를 지원하기 위한 XML 설정 -->
+
+<bean id="viewResolver"  // Thymeleaf 뷰 리졸버
+      class="org.thymeleaf.spring3.view.ThymeleafViewResolver"
+      p:templateEngine-ref="templateEngine" />
+<bean id="templateEngine"  // 템플릿 엔진
+      class="org.thymeleaf.spring3.SpringTemplateEngine"
+      p:templateResolver-ref="templateResolver" />
+<bean id="templateResolver"  // 템플릿 리졸버
+      class="org.thymeleaf.templateresolver.ServletContextTemplateResolver"
+      p:prefix="/WEB-INF/templates/"
+      p:suffix=".html"
+      p:templateMode="HTML5" />

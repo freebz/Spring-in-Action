@@ -1,0 +1,29 @@
+// 코드 21.1  주소록 애플리케이션을 위한 그래들 빌드 파일
+
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.4.RELEASE")
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'  // 스프링 부트 플러그인 사용
+
+jar {  // Jar 파일 생성
+  baseName = 'contacts'
+  version = '0.1.0'
+}
+repositories {
+  mavenCentral()
+}
+
+dependencies {  // 의존성의 위치
+
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.8'
+}

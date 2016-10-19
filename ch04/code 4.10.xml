@@ -1,0 +1,25 @@
+<!-- 코드 4.10  <aop:pointcut>를 사용하여 명명된 포인트커트 정의하기 -->
+
+<aop:config>
+  <aop:aspect ref="audience">
+    <aop:pointcut  <!-- 포인트커트 정의 -->
+      id="performance"
+      expression="execution(** concert.Performance.perform(..))" />
+
+    <aop:before  <!-- 포인트커트 참조 -->
+      pointcut-ref="performance"
+      method="silenceCellPhones" />
+
+    <aop:before <!-- 포인트커트 참조 -->
+      pointcut-ref="performance"
+      method="takeSeats" />
+
+    <aop:after-returning  <!-- 포인트커트 참조 -->
+      pointcut-ref="performance"
+      method="applause" />
+
+    <aop:after-throwing  <!-- 포인트커트 참조 -->
+      pointcut-ref="performance"
+      method="demandRefund" />
+  </sop:aspect>
+</aop:config>

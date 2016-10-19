@@ -1,0 +1,20 @@
+<!-- 코드 18.3  WebSocket 네임스페이스는 웹 소켓을 위한 XML 설정을 활성화한다. -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="
+			   http://www.springframework.org/schema/websocket
+			   http://www.springframework.org/schema/websocket/spring-websocket.xsd
+			   http://www.springframework.org/schema/beans
+			   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <websocket:handlers>
+    <websocket:mapping handler="marcoHandler" path="/marco" />  <!-- "/marco"로 MarcoHandler를 매핑 -->
+  </websocket:handlers>
+
+  <bean id="marcoHandler"
+	class="marcopolo.MarcoHandler" />  <!-- MarcoHandler 빈 선언 -->
+
+</beans>

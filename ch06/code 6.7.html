@@ -1,0 +1,36 @@
+<!-- 코드 6.7  폼과 명령 객체를 Thymeleaf로 바인딩한 등록 페이지 -->
+
+<form method="POST" th:object="${spitter}">
+  <div class="errors" th:if="${#fields.hasErrors('*')}">  <!-- 오류 표시 -->
+    <ul>
+      <li th:each="err : ${#fields.errors('*')}"
+	  th:text="${err}">Input is incorrect</li>
+    </ul>
+  </div>
+  <label th:class="${#fields.hasErrors('firstName')}? 'error'">  <!-- 이름 -->
+      First Name</label>:
+    <input type="text" th:field="*{firstName}"
+	   th:class="${#fields.hasErrors('firstName')}? 'error'"/><br />
+
+  <label th:class="${#fields.hasErrors('lastName')}? 'error'">  <!-- 성 -->
+      Last Name</lable>:
+    <input type="text" th:field="*{lastName}"
+	   th:class="${#fields.hasErrors('lastName')}? 'error'" /><br />
+
+  <label th:class="${#fields.hasErrors('email')}? 'error'">  <!-- 이메일 -->
+      Email</label>:
+    <input type="text" th:field="*{email}"
+	   th:class="${#fields.hasErrors('email')}? 'error'" /><br />
+
+  <label th:class="${#fields.hasErrors('username')}? 'error'">  <!-- 사용자명 -->
+      Username</label>:
+    <input type="text" th:field="*{username}"
+	   th:class="${#fields.hasErrors('username')}? 'error'" /><br />
+
+  <label th:class="${#fields.hasErrors('password')}? 'error'">  <!-- 암호 -->
+      Password</label>:
+    <input type="password" th:field="*{password}"
+	   th:class="${#fields.hasErrors('password')}? 'error'" /><br />
+
+  <input type="submit" value="Register" />
+</form>

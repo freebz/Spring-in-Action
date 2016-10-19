@@ -1,0 +1,16 @@
+<!-- 코드 12.9  스프링 데이터 Neo4j는 XML로 설정된다. -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:neo4j="http://www.springframework.org/schema/data/neo4j"
+       xsi:schemaLocation="
+			   http://www.springframework.org/schema/beans
+			   http://www.springframework.org/schema/beans/spring-benas.xsd
+			   http://www.springframework.org/schema/data/neo4j
+			   http://www.springframework.org/schema/data/neo4j/spring-neo4j.xsd">
+  <neo4j:config
+      storeDirectory="/tmp/graphdb"
+      base-package="orders" />  <!-- Neo4j 데이터베이스의 상세 설정 -->
+  <neo4j:repositories base-package="orders.db" />  <!-- 저장소 생성 활성화 -->
+</beans>

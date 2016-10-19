@@ -1,0 +1,23 @@
+<!-- 코드 12.4  스프링 데이터 MongoDB는 XML 설정 옵션을 제공 -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:xchemaLocation="
+			   http://www.springframework.org/schema/data/mongo
+			   http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+			   http://www.springframework.org/schema/beans
+			   http://www.springframework.org/schema/beans/spring-beans.xsd">  <!-- mongo 네임스페이스 선언 -->
+  
+  <mongo:repositories base-package="orders.db" />  <!-- 저장소 생성 활성화 -->
+
+  <mongo:mongo />  <!-- MongoClient 선언 -->
+
+  <bean id="mongoTemplate"
+	class="org.springframework.data.ongodb.core.MongoTemplate">  <!-- MongoTemplate 빈 생성 -->
+    <constructor-arg ref="mongo" />
+    <constructor-arg value="OrdersDB" />
+  </bean>
+
+</beans>

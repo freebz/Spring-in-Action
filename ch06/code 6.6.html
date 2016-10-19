@@ -1,0 +1,16 @@
+<!-- 코드 6.6  home.html: Thymeleaf 네임스페이스를 사용한 홈페이지 템플릿 -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">  <!-- THymeleaf 네임스페이스 선언 -->
+  <head>
+    <title>Spittr</title>
+    <link rel="stylesheet"
+	  type="text/css"
+	  th:href="@{/resources/style.css}"></link>  <!-- 스타일 시트에 연결되는 th:href -->
+  </head>
+  <body>
+    <h1>Welcome to Spittr</h1>
+    <a th:href="@{/spittles}">Spittles</a> |  <!-- 페이지에 연결되는 ht:href -->
+    <a th:href="@{/spitter/register}">Register</a>
+  </body>
+</html>

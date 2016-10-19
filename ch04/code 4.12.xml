@@ -1,0 +1,13 @@
+<!-- 코드 4.12  <aop:around> 요소를 사용하여 XML의 around 어드바이스 선언하기 -->
+
+<aop:config>
+  <aop:aspect ref="audience">
+    <aop:pointcut
+	id="performance"
+	expression="execution(** concert.Performance.perform(..))" />
+
+    <aop:around  <!-- around 어드바이스 선언 -->
+      pointcut-ref="performance"
+      method="watchPerformance" />
+  </aop:aspect>
+</aop:config>

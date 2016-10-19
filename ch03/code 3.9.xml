@@ -1,0 +1,6 @@
+<!-- 프로퍼티 플레이스홀더 처리하기 -->
+
+<bean id="sgtPeppers"
+      class="soundsystem.BlankDisc"
+      c:_title="${disc.title}"
+      c:_artist="${disc.artist}" />

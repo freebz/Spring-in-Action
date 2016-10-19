@@ -1,0 +1,34 @@
+<!-- 코드 8.8  주문 서브플로 뷰는 피자를 주문하거나 만드는 것을 표시하기 위한 상태들을 보여 준다. -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+			  http://www.springframework.org/schema/webflow/spring-webflow-2.3.xsd">
+
+  <input name="order" required="true" />  <!-- 입력으로 주문을 받음 -->
+
+  <view-state id="showOrder">  <!-- 주문 표시 상태 -->
+    <transition on="createPizza" to="createPizza" />
+    <transition on="checkout" to="orderCreated" />
+    <transition on="cancel" to="cancel" />
+  </view-state>
+
+  <view-state id="createPizza" model="flowScope.pizza">  <!-- 피자 생성 상태 -->
+    <on-entry>
+      <set name="flowScope.pizza"
+	   value="new com.springinaction.pizza.domain.Pizza()" />
+      <evaluate result="viewScope.toppingsList" expression=
+		"T(com.springinaction.pizza.domain.Topping).asList()" />
+    </on-entry>
+    <transition on="addPizza" to="showOrder">
+      <evaluate expression="order.addPizza(flowScope.pizza)" />
+    </transition>
+    <transition on="cancel" to="showOrder" />
+  </view-state>
+
+  <end-state id="cancel" />  <!-- 최소 종료 상태 -->
+
+  <end-state id="orderCreated" />  <!-- 주문 생성 End 상태 -->
+
+</flow>

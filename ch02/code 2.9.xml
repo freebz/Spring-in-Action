@@ -1,0 +1,107 @@
+<!-- 2.4 빈을 XML로 와이어링하기 -->
+
+<!-- 2.4.1 XML 설정 스펙 만들기 -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			   http://www.springframework.org/schema/beans/spring-beans.xsd
+			   http://www.springframework.org/schema/context">
+
+  <!-- configuration details go here -->
+
+  <!-- 2.4.2 간단한 빈 선언 -->
+  <bean class="sourdsystem.SgtPeppers" /> <!-- bean id는 soundsystem.SgtPeppers#0 -->
+
+  <bean id="compactDisc" class="soundsystem.SgtPeppers" />
+
+  
+  <!-- 2.4.3 생성자 주입을 사용하여 빈 초기화하기 -->
+
+  <!-- 빈 레퍼런스를 사용한 생성자 주입 -->
+  <bean id="cdPlayer" class="soundsystem.CDPlayer">
+    <constructor-arg ref="compactDisc" />
+  </bean>
+
+  <bean id="cdPlayer" class="soundsystem.CDPlayer"
+	c:cd-ref="compactDisc" />
+
+  <bean id="cdPlayer" class="soundsystem.CDPlayer"
+	c:_0-ref="compactDisc" />
+
+  <bean id="cdPlayer" class="soundsystem.CDPlayer"
+	c:_-ref="compactDisc" />
+
+  
+  <bean id="compactDisc" class="soundsystem.BlankDisc">
+    <constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
+    <constructor-arg value="The Beatles" />
+  </bean>
+
+  <bean id="compactDisc"
+	class="soundsystem.BlankDisc"
+	c:_title="Sgt. Pepper's Lonely Hearts Club Band"
+	c:_artist="The Beatles" />
+
+  
+  <!-- 리터럴 값을 생성자에 주입하기 -->
+  <bean id="compactDisc"
+	class="soundsystem.BlankDisc"
+	c:_0="Sgt. Pepper's Lonely Hearts Club Band"
+	c:_1="The Beatles" />
+
+  <bean id="compactDisc" class="soundsystem.BlankDisc"
+	c:_="Sgt. Pepper's Lonely Hearts Club Band" />
+
+
+  <!-- 와이어링 컬렉션 -->
+  <bean id="compactDisc" class="soundsystem.BlankDisc">
+    <constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
+    <constructor-arg value="The Beatles" />
+    <constructor-arg><null/></constructor-arg>
+  </bean>
+
+  <bean id="compactDisc" class="soundsystem.BlankDisc">
+    <constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
+    <constructor-arg value="The Beatles" />
+    <constructor-arg>
+      <list>
+	<value>Sgt. Pepper's Lonely Hearts Club Band</value>
+	<value>With a Little Help from My Friends</value>
+	<value>Getting Better</value>
+	<value>Fixing a Hole</value>
+	<!-- ...other tracks omitted for brevity... -->
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean id="betelesDiscography"
+	class="soundsystem.Discography">
+    <constructor-arg value="The Beatles" />
+    <constructor-arg>
+      <list>
+	<ref bean="sgtPeppers" />
+	<ref bean="whiteAlbum" />
+	<ref bean="hardDaysNight" />
+	<ref bean="resolver" />
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean id="compactDisc" class="soundsystem.BlankDisc">
+    <constructor-arg value="Sgt. Pepper's Lonely Hearts Club Band" />
+    <constructor-arg value="The Beatles" />
+    <constructor-arg>
+      <set>
+	<value>Sgt. Pepper's Lonely Hearts Club Band</value>
+	<value>With a Little Help from My Friends</value>
+	<value>Getting Better</value>
+	<value>Fixing a Hole</value>
+	<!-- ...other tracks omitted for brevity... -->
+      </set>
+    </constructor-arg>
+  </bean>
+  
+</beans>
